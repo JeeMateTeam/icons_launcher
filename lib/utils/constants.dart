@@ -34,7 +34,10 @@ const int ANDROID_DEFAULT_MIN_SDK = 21;
 const String ANDROID_LOCAL_PROPERTIES = 'android/local.properties';
 
 /// Android build gradle file location
-const String ANDROID_GRADLE_FILE = 'android/app/build.gradle.kts';
+const String ANDROID_GRADLE_FILE = 'android/app/build.gradle';
+
+/// Android build gradle file location
+const String ANDROID_GRADLE_KOTLIN_FILE = 'android/app/build.gradle.kts';
 
 /// Android colors xml file location
 const String ANDROID_COLOR_FILE = 'values/colors.xml';

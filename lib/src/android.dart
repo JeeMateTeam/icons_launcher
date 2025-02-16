@@ -527,13 +527,22 @@ void _removeAndroidManifestIconLauncherRound() {
 }
 
 /// Retrieves the minSdk value
-int _minSdk() {
+Future<int> _minSdk() async {
   String? minSdkValue;
 
   final androidGradleFile = File(ANDROID_GRADLE_FILE);
-  final androidLines = androidGradleFile.readAsLinesSync();
+  final androidGradleKotlinFile = File(ANDROID_GRADLE_KOTLIN_FILE);
 
-  //! First try -> app/build.gradle file
+  List<String> androidLines;
+  if (await androidGradleFile.exists()) {
+    androidLines = androidGradleFile.readAsLinesSync();
+  } else if (await androidGradleKotlinFile.exists()) {
+    androidLines = androidGradleKotlinFile.readAsLinesSync();
+  } else {
+    throw Exception('Android gradle file not found');
+  }
+
+  //! First try -> app/build.gradle or app/build.gradle.kts file
   const androidLineKey = 'minSdkVersion';
   minSdkValue = _getLineValueNumber(androidLines, androidLineKey);
 
